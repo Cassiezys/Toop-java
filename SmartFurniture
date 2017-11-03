@@ -1,0 +1,127 @@
+class Furniture {
+    private String brand,color;
+    private double price,power;
+    
+    public Furniture(){}
+    public Furniture(String brand,String color,double price,double power){
+    	this.brand=brand;
+    	this.color=color;
+    	this.price=price;
+    	this.power=power;
+    }
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public double getPower() {
+		return power;
+	}
+	public void setPower(double power) {
+		this.power = power;
+	}
+    
+	public void Start(String start_time){
+		System.out.println("启动时间为"+start_time);
+	}
+	public void last(String last_time){
+		System.out.println("持续时间为"+last_time);
+	}
+	public void close(String close_time){
+		System.out.println("关闭时间为："+close_time);
+	}
+
+}
+class television extends Furniture{
+	private int loud=12;
+	public television(String brand,String color,double price,double power){
+		super(brand,color,power,price);
+	}
+	public void control(int i){
+		if(i==1){
+			if(loud<22){
+			this.loud++;
+			System.out.println("当前音量为"+this.loud);
+		}
+			else
+				System.out.println("已经是最大音量");
+		}
+		else if(i==0){
+			if(loud>0){
+			this.loud--;
+			System.out.println("当前音量为"+this.loud);
+			}
+			else
+			System.out.println("已是最小音量");
+		}
+		else
+			System.out.println("1为加0为减");
+	}
+
+}
+class fridge extends Furniture{
+	public fridge(String brand,String color,double price,double power){
+		super(brand,color,price,power);
+	}
+	public void compensate(int temple){
+		if(temple>0)
+			System.out.println(this.getBrand()+"冰箱开启低温补偿");
+			else
+				System.out.println("冰箱不需要开启低温补偿");
+	}
+}
+
+class autoclave extends Furniture {
+	private double temple;
+	public autoclave(){}
+	public autoclave(String brand,String color,double price,double power,double temple){
+		super(brand,color,price,power);
+		this.temple=temple;
+	}
+	public void active(String name){
+		System.out.println(this.getBrand()+"高压锅正在"+name);
+	}
+}
+
+class air_conditioner extends Furniture{
+	public air_conditioner(String brand,String color,double price,double power){
+		super(brand,color,price,power);
+	}
+	public void control(int number){
+		System.out.println(this.getBrand()+"空调当前风速为"+number);
+	}
+}
+public class App_Demo {
+
+	public static void main(String[] args) {
+		autoclave gyg=new autoclave("美的","黑色",800,1000,100);
+		fridge bx=new fridge("格里","银色",500,2000);
+		television tv=new television("康佳","黑色",800,2000);
+		air_conditioner kt=new air_conditioner("美的","白色",800,3000);
+		gyg.Start("11:30");
+		gyg.last("30");
+		gyg.close("12:00");
+		gyg.active("煮猪脚");
+		bx.last("∞∞");
+		bx.compensate(-1);
+		tv.Start("12:00");
+		tv.control(1);
+		kt.Start("11:50");
+		kt.last("50");
+		kt.control(2);
+	}
+
+}
