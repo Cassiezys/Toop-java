@@ -1,0 +1,47 @@
+class Check { //用户名和密码判断是否正确
+	private String name="20164206199";  //定义的用户名
+	private String password="199199"; //定义的密码
+	private String[] info;
+	public Check(String[] str){
+		this.info=str;
+	}
+	public boolean isright(){
+		if(this.info[0].equals(name)
+				&&this.info[1].equals(password)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+class Login { //内部登录界面
+	private String[] str;
+	public Login(String[] str){
+		this.str=str;
+	}
+	public String operation(){
+		Check check=new Check(str);
+		isExit(); //判断格式  this.isExit()
+		if(check.isright()){
+			return "正在进入";
+		}else{
+			return "用户名或密码错误";
+		}
+	}
+	public void isExit(){
+		if(this.str.length!=2){
+			System.out.println("格式错误");
+			System.exit(1);
+		}
+	}
+}
+
+public class LoginDemo {  //用户界面
+
+	public static void main(String[] args) {
+		Login login = new Login(args);    // 用CMD界面输入
+		System.out.println(login.operation());
+
+	}
+
+}
