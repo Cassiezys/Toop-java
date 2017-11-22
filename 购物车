@@ -1,0 +1,70 @@
+package Test6_15;
+interface ShopBuying{  //定义了一个接口
+	String getName();
+	int getPrice();
+}
+class Food implements ShopBuying{
+	private String name;
+	private int price;
+	public Food(String name, int price) {
+		this.name = name;
+		this.price = price;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+}
+class ShopCar{
+	private ShopBuying[] shopbuying;
+	private int foot;
+	public ShopCar(int len){
+		if(len>0){
+			shopbuying=new ShopBuying[len];
+		}else
+			shopbuying=new ShopBuying[1];
+	}
+	public boolean add(ShopBuying a){
+		if(this.foot<this.shopbuying.length){
+			this.shopbuying[this.foot++]=a;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public ShopBuying[] display(){
+		/*int sum = 0;
+		for(int i=0;i<foot;i++)
+			sum+=this.shopbuying[i].getPrice();*/
+		return shopbuying;
+	}
+}
+public class Test02 {
+	public static void main(String[] args){//收银员处的功能
+		ShopCar shopcar=new ShopCar(5);   //输入总容量 
+		shopcar.add(new Food("洗衣粉",50)); //扫描第一样商品
+		shopcar.add(new Food("饼干",20));   //第二样
+		shopcar.add(new Food("水果",30));
+		print(shopcar.display());  //打印全部商品 以及总额
+	}
+	public static void print(ShopBuying[] shopBuying){
+		int sum=0;
+		for(int i=0;i<shopBuying.length;i++){
+			if(shopBuying[i]!=null){
+				sum+=shopBuying[i].getPrice();
+			System.out.println(shopBuying[i].getName()+
+				"\t"+	shopBuying[i].getPrice());
+			}
+			
+		}
+		System.out.println("总价格为:"+sum);
+	}
+}
