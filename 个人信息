@@ -1,0 +1,106 @@
+interface Info {  //标识接口(没有方法的接口）
+
+}
+package 泛型与接口并用;
+/*** 个人信息***/
+public class Introduction implements Info{
+	private String name;
+	private String sex;
+	private int age;
+	public Introduction(String name, String sex, int age) {
+		this.name = name;
+		this.sex = sex;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Introduction [name=" + name + ", sex=" + sex + ", age=" + age + "]";
+	}
+	
+}
+package 泛型与接口并用;
+/***  联系方式 等  **/
+public class Contract implements Info {
+	private String address;  //住址  
+	private String telephone;//电话
+	private String zipcode;  //邮政编码
+	public Contract(String address, String telephone, String zipcode) {
+		this.address = address;
+		this.telephone = telephone;
+		this.zipcode = zipcode;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	@Override
+	public String toString() {
+		return "Contract [address=" + address + ", telephone=" + telephone + ", zipcode=" + zipcode + "]";
+	}
+	
+}
+package 泛型与接口并用;
+/***泛型运用 ***/
+class Person<T extends Info>{
+	private T t;
+	public Person(T t){
+		this.t=t;
+	}
+	public T getT() {
+		return t;
+	}
+	public void setT(T t) {
+		this.t = t;
+	}
+	@Override
+	public String toString() {
+		return "Person [t=" + t + "]";//this.t.toString();
+	}
+}
+package 泛型与接口并用;
+
+public class PerInfo {
+
+	public static void main(String[] args) {
+		Person<Contract> contracter = null;
+    contracter=new Person<Contract>(new Contract("湖南省","10086","2064532")); //定义方法1
+		System.out.println(contracter.toString());
+		Person<Introduction> introducer = null;///定义方法2
+	  Introduction i=new Introduction("李兴华","男",30);
+		introducer=new Person<Introduction>(i);
+		System.out.println(introducer.toString());
+	}
+
+}
